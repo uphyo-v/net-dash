@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 style="margin-left: 3%"> {{header}}</h1>
+<div style="margin-left: 5%">
+	Total Sites: <b>{{total}}</b>
+	{% if user.is_authenticated %}
+	<a href="{% url 'siteupload' %}" style="margin-left: 5%; margin-right: 1%">[Upload]</a>
+	<a href="{% url 'add_site' %}" style="margin-left: 5%; margin-right: 1%">[Add Site]</a>
+	{% endif %}
+	<a href="{% url 'sitedownload' %}" style="margin-left: 5%; margin-right: 1%">[Download]</a>
+	<form class="a" style="margin-right: 3%">
+        <input class="a" type="text" id="myInput" onkeyup="myFunction()"placeholder="Search by Site..." >
+    </form>
+</div>
+
+<table class=a id='myTable'>
+		<tr>
+			<th>Site Code</th>
+			<th>Country</th>
+			<th>Project</th>
+			<th>Contact</th>
+			<th>Action</th>
+			
+		</tr>
+
+
+		{% for field in form %}
+		
+		<tr>
+      <td><a href="{% url 'devices' 0 field.Name field.Project %}">{{field.Name}}</td></a>
+			<td><a href="{% url 'sites' field.Country %}">{{field.Country}}</td></a>
+			<td>{{field.Project}}</td>
+			<td><p>{{field.Contact}}</p></td>
+
+			<td><li style="list-style-type: none;"><a href="{% url 'sitecheck' field.Name field.Project 'all' %}" target="_blank">[Check Devices]</a></li>
+				<li style="list-style-type: none;"><a href="{% url 'sitebackup' field.Name field.Project %}" target="_blank">[Backup Config]</a></li>
+				<li style="list-style-type: none;">
+                        <a href="{% url 'edit_device' 'site' field.pk %}">[Edit]</a></li>
+				{% if user.is_authenticated %}
+				<a href="{% url 'delete_site' field.pk %}" onclick="return confirm('Are you sure you want to delete..')">[Delete]</a>
+				{% endif %}
+			</td>
+
+		</tr>
+
+
+		{% endfor %}
+		
+	</table>
+
+<div style="margin-left: 5%">
+	Total Sites: <b>{{total}}</b>
+	{% if user.is_authenticated %}
+	<a href="{% url 'siteupload' %}" style="margin-left: 5%; margin-right: 1%">[Upload]</a>
+	<a href="{% url 'add_site' %}" style="margin-left: 5%; margin-right: 1%">[Add Site]</a>
+	{% endif %}
+	<a href="{% url 'sitedownload' %}" style="margin-left: 5%; margin-right: 1%">[Download]</a>
+</div>
+
+</form>
+
+{% endblock %}

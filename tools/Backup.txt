@@ -1,0 +1,20 @@
+show run
+show ip int br
+show int status
+show inven
+show logg
+show clock
+show ip route
+show ip bgp sum
+show ip bgp nei x.x.x.x routes
+show ip bgp nei x.x.x.x adv
+show ip ospf neig
+show ip ospf database
+show ip protocol
+show mac address
+show ip arp
+show version
+show boot
+dir
+show proc cpu history
+show proc memory sorted

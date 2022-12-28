@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<form class=a method='POST'>
+	<br>
+	{% csrf_token%}
+	<table style="margin-left: 3%; width: 90%">
+		{{ form.as_table}}
+	</table>
+	<!--{% for field in form %}
+		<div class="form-group row">
+			<label for="id_{{field.name}}" class="col-2 col-form-label">
+			{{field.label}}</label>
+			{{field}}
+      {% if field.help_text %}
+      {{field.help_text}}
+      {% endif %}
+		</div>
+	{% endfor %}-->
+
+
+<button style="margin-left: 3%; margin-top: 1%"> Save </button>
+<a href="{% url 'projectlist' %}">Cancel</a>
+</form>
+
+{% endblock %}

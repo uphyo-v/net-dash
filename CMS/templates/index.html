@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 align="center" style="margin-top: 3%"> 
+
+Welcome to My Hub
+
+	
+<div align="center" style="margin-top: 2%">
+  <img src="resources/pic/img_snow_wide.jpg" class="responsive" />
+</div>
+<div>
+<p style="color: black; size: 18px; margin-left: 3%; font-size: 30px">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'projectlist' %}">
+            Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'sitelist' %}">Sites</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'devicelist' %}">Devices</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'circuitlist' %}">Circuits</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'tool' %}">Tools</a>
+          </li>
+</p>
+</div>
+
+{% endblock %}

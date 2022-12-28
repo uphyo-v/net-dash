@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Networking Dashboard </title>
+ {% block header %}
+ {% endblock %}
+</head>
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static '/css/style.css '%}">
+<link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap.min.css '%}">
+
+<style>
+  .collapsible {
+  background-color: #512E5F;
+  color: silver;
+  cursor: pointer;
+  border-bottom-color: #1B2631;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  width: 85%;
+  margin-left: 3%;
+  text-align: left;
+  font-size: 12px;
+}
+
+  .collapsible2 {
+  background-color: #212F3C;
+  cursor: pointer;
+  border-bottom-color: #1B2631;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  width: 85%;
+  margin-left: 3%;
+  text-align: left;
+  font-size: 12px;
+}
+
+.active, .collapsible2:hover {
+  background-color: #154360;
+}
+
+.active, .collapsible:hover {
+  background-color: #512E5F;
+}
+
+.collapsible:after {
+  content: '\002B';
+  color: silver;
+  background-color: #512E5F;
+  font-weight: bold;
+  float: right;
+  font-size: 20px;
+  margin: 0% 5%;
+}
+
+.collapsible2:after {
+  content: '\002B';
+  background-color: #512E5F;
+  color: silver;
+  font-weight: bold;
+  float: right;
+  margin-right: 1%;
+  font-size: 20px;
+  margin: 0% 5%;
+}
+
+.active:after {
+  content: "\2212";
+  font-size: 20px;
+}
+.content {
+  width: fixed;
+  padding: 0 10px;
+  display: none;
+  overflow: hidden;
+}
+
+.content2 {
+  width: 80%;
+  margin-left: 1%;
+  margin-right: 3%;
+  padding: 0 5px;
+  display: none;
+  overflow: hidden;
+}
+img.image{
+  width: auto; 
+  align-self: center
+  width: 100px;
+  height: 100px;
+}
+
+.responsive{
+  width: 100%;
+  height: auto;
+
+}
+p.a{
+  text-align: left;
+  margin-left: 90%
+}
+table.a {
+  table-layout: fixed;
+  margin: 0% 5%;
+  text-align: left;
+  width: 90% ;
+  font-size:90%;
+
+}
+a{
+  margin:1% 5%;
+  color: #3DA10F;
+}
+th{
+  padding:5px;
+  background-color: #512E5F;
+  color: silver;
+  text-align: left;
+}
+tr:nth-child(odd) {
+  background-color: #212F3C
+}
+
+tr:nth-child(even) {
+  background-color: #1B2631
+
+
+}
+tr:hover{
+  background-color: #154360
+}
+td{
+  padding:10px;
+  text-align: left;
+
+}
+
+form.a {
+  margin-top: 0.5%;
+  margin-right: 0.5%;
+  overflow: hidden;
+}
+form.input.a {
+  background-color: #117864;
+  float: right;
+  clear: both;
+}
+</style>
+<font color="silver">
+<body style="background-color:  #000000">
+
+	<nav class="navbar navbar-expand navbar-dark bg-dark">
+      
+      <div class="collapse navbar-collapse" id="navbars">
+        <ul class="navbar-nav mr-auto">
+           <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}"> Home<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'projectlist' %}">
+            Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'sitelist' %}">Sites</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'devicelist' %}">Devices</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'circuitlist' %}">Circuits</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'tool' %}">Tools</a>
+          </li>
+
+        </ul>
+
+        </div>
+        <div style="float: right; margin-right: 3%">
+          {% if user.is_authenticated %}
+          Hi {{user}},
+          <a href=" /accounts/logout" style='float: right;'> logout </a>
+          {% else %}
+            <a href="{% url 'logmein' %}"> login </a>
+          </li>
+          {% endif %}
+        </div>
+    </nav>
+
+      <!---div align="margin-right">
+        <form class="a">
+          <input class="a" type="text" id="myInput" onkeyup="myFunction()"placeholder="Search by Project..." >
+        </form>
+        <form class="a">
+          <input class="a" type="text" id="myModel" onkeyup="myModelFunction()"placeholder="Search by model..." >
+        </form>
+
+      </div--->
+
+
+	{% block content %}
+
+	{% endblock %}
+
+ 
+</div>
+</font>
+</body>
+{% block script %}
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+    console.log(txtValue.toUpperCase().indexOf(filter))
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+function myModel() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myModel");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[3];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+    console.log(txtValue.toUpperCase().indexOf(filter))
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+{% endblock %}
+<script>
+
+function fnExcelReport()
+{
+    var tab_text="<table border='2px' font-size='30px'><tr bgcolor='#87AFC6'>";
+    var textRange; var j=0;
+    tab = document.getElementById('myTable'); // id of table
+
+    for(j = 0 ; j < tab.rows.length ; j++) 
+    {     
+        tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+        //tab_text=tab_text+"</tr>";
+    }
+
+    tab_text=tab_text+"</table>";
+    tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+    tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+    tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE "); 
+
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+    {
+        txtArea1.document.open("txt/html","replace");
+        txtArea1.document.write(tab_text);
+        txtArea1.document.close();
+        txtArea1.focus(); 
+        sa=txtArea1.document.execCommand("SaveAs",true,"projects.xls");
+    }  
+    else                 //other browser not tested on IE 11
+        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
+
+    return (sa);
+}
+
+
+</script>
+</html>

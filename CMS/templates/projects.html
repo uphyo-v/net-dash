@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 style="margin-left: 3%"> Projects Summary</h1>
+<div style="margin-left: 5%"><a href="{% url 'add_project' %}" style="margin-left: 84%; margin-right: 1%">Add Project</a>
+</div>
+<table class=a>
+<tr>
+	<th> Project Name </th>
+	<th> Start Date </th>
+	<th> End Date </th>
+  <th> Action </th>
+
+</tr>
+
+{% for field in form %}
+<tr>
+	<td><a href="{% url 'sites' field.pk %}">{{field.Name}}</td></a>
+	<td>{{field.StartDate}}</td>
+	<td>{{field.EndDate}}</td>
+  <td>{% if user.is_authenticated %}<a href="{% url 'delete_project' field.pk %}" onclick="return confirm('Are you sure you want to delete..')">[Delete]</a></td>{% endif %}
+
+</tr>
+{% endfor %}
+</table>
+<div style="margin-left: 5%"><a href="{% url 'add_project' %}" style="margin-left: 84%; margin-right: 1%">Add Project</a>
+</div>
+
+<div align="center" style="margin-top: 3%">
+  <img src="../resources/pic/projects.jpeg" class="image" />
+</div>
+
+{% endblock %}

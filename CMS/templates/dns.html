@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<p><h4>&nbsp;&nbsp;DNS Information Query</h4></p>
+<body>
+<div align="left">
+<form class="form-style-4" action="" method="post" id="ipform">
+	{% csrf_token %}
+<label for="dns">
+<span>Name </span><input type="text" value="" name="dvalue" required="true" />
+</label>
+<label for="subnet">
+<span>Type </span>
+</label>
+<select class="option-style-2" name="qtype" form="ipform" required="true">
+<option class="option-style-2">A</option>
+<option class="option-style-2">AAAA</option>
+<option class="option-style-2">CNAME</option>
+<option class="option-style-2">MX</option>
+<option class="option-style-2">NS</option>
+<option class="option-style-2">SOA</option>
+
+</select>
+
+<label>
+<br>
+<span> </span><input type="submit" value="Submit" />
+</label>
+
+</form>
+
+
+
+
+{% if result %}
+<table>
+	<tr><th align="center">Name</th>
+<th>Type</th><th>Result</th></tr>
+	<tr><td>{{request}}</td>
+	<td>{{type}}</td>
+	<td>
+	{% for field in result %}
+		{{field}}<br> 
+	{% endfor %}
+</td>
+</tr>
+<br>
+</table>
+<br>
+<form class="form-style-4" method="get"><button type='submit' a href="{% url 'dnsreq' %}">Reset</a></button></form>
+{% endif %}
+</div>
+{% endblock %}

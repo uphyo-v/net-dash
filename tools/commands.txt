@@ -1,0 +1,20 @@
+show run
+show version
+show boot
+show inv
+show ip int bri 
+show process cpu history
+show process memory sorted
+show int des
+show int status
+show cdp nei
+show logging
+show clock
+show ip route
+show ip route ospf
+show ip route bgp
+show ip protocol
+show ip arp
+show switch
+show mac address
+show vlan bri

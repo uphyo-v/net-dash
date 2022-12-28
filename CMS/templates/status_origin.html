@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error %}
+{{error}}
+{% endif %}
+{% if date %}
+<h3 style="margin-left: 1%">{{projectname}}:{{sitename}}</h3>
+<li style="list-style-type: none; font-size: 14px;margin-left: 1%; font-weight: bold;">Date:	{{date}}</li>
+<li style="list-style-type: none; font-size: 14px;margin-left: 1%; font-weight: bold;">Time:	{{start_time}}</li>
+<!--<li style="list-style-type: none; font-size: 14px;margin-left: 1%; font-weight: bold;">End:	{{finish_time}}</li>-->
+
+
+{% for devices in form %}
+{% for key,value in devices.items %}
+<b style="margin-left: 2%; background: #009900; color: #000000"><u>{{key}}<br></u></b></td>
+<table class=a style="margin-left: 2%">
+	<tr>
+		<th>Description</th>
+		<th>Details</th>
+	</tr>
+	{% for k,v in value.items %}
+	<tr>
+		<td>
+<u style="margin-left: 3%">{{k}}</u></td>
+<td>{% for item in v %}
+<li style="list-style-type: none; font-size: 13px;margin-left: 3%">{{item}}</li>
+{% endfor %}
+</td>
+{% endfor %}
+</tr>
+{% endfor %}
+</table>
+<!---b style="margin-left: 2%">==================================================================</b-->
+<br>
+{% endfor %}
+{% endif %}
+
+
+<!--{% for item in form %}
+{% for line in item %}
+<li style="list-style-type: none; font-size: 10px">{{line}}</li>
+{% endfor %}
+<br>
+{% endfor %}
+--->
+
+{% endblock %}

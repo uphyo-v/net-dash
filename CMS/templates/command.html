@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if header %}
+<h1 style="margin-left: 3%"> {{header}}</h1>
+{% endif %}
+<body>
+<div style="margin-left: 3%">
+<form class="form-style-4" action="" method="post" id="commandform">
+	{% csrf_token %}
+<label for="command">
+<span>Command </span><input type="text" value="" name="cmd" required="true" />
+</label>
+
+<label>
+<br>
+<span> </span><input type="submit" value="Submit" />
+</label>
+
+</form>
+
+{% if result %}
+<pre style="color:silver; margin-top: 3%"><li style="font-family: monospace; color: silver;  list-style-type: none; font-size: 13px;margin-left: 3%">{{result}}</li></pre>
+
+<br>
+
+{% endif %}
+</div>
+{% endblock %}

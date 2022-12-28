@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p style="margin-left: 3%; font-size: 80% ">Make sure the csv with the following column per data type: <br>
+- Device:   Name/IP/Category/Project/Site/id<br>
+- Site:   Name/Project/Country/id<br>
+- Circuit:   CircuitID/Bandwidth/WANIP/Project/Site/id <br>
+<font color= 'c31fac'>Note: no value needed to fill in for "id"</font>
+</p>
+
+ <form class = 'f' method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+     &nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="myfile">
+    <button type="submit" onclick="return confirm('Are you sure you want to upload')">Import</button>
+  </form>
+{% endblock %}

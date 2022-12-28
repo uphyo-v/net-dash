@@ -1,0 +1,14 @@
+FROM python:3.8.5
+ENV PYTHONUNBUFFERED 1
+ADD . .
+RUN apt-get update
+RUN apt-get -y install python3 python3-pip default-libmysqlclient-dev
+RUN pip3 install virtualenv
+RUN mkdir /opt/.dashboard
+RUN virtualenv /opt/.dashboard/venv
+RUN . /opt/.dashboard/venv/bin/activate
+RUN pip3 install -r requirements.txt
+RUN ["python3", "manage.py", "makemigrations"]
+RUN ["python3", "manage.py", "migrate"]
+ENTRYPOINT ["python3", "manage.py", "runserver"]
+EXPOSE 8000

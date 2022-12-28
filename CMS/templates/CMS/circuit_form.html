@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h2>Device Form</h2>
+
+  <form method="post" id="deviceForm" data-sites-url="{% url 'ajax_load_sites' %}" novalidate>
+    {% csrf_token %}
+    <table style="margin-left: 3%; width: 90%">
+      {{ form.as_table }}
+    </table>
+    <button type="submit" style="margin-left: 3%; margin-top: 1%">Add</button>
+<a href="{% url 'sitelist' %}">Cancel</a>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+  <script>
+    $("#id_Project").change(function () {
+      var url = $("#deviceForm").attr("data-sites-url");
+      var ProjectId = $(this).val();
+
+      $.ajax({
+        url: url,
+        data: {
+          'Project': ProjectId
+        },
+        success: function (data) {
+          $("#id_Site").html(data);
+        }
+      });
+
+    });
+  </script>
+
+{% endblock %}

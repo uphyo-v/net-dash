@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error %}
+{{error}}
+{% endif %}
+{% if date %}
+<h3 style="margin-left: 1%">{{projectname}}:{{sitename}}</h3>
+<li style="list-style-type: none; font-size: 14px;margin-left: 1%; font-weight: bold;">Date:	{{date}}</li>
+<li style="list-style-type: none; font-size: 14px;margin-left: 1%; font-weight: bold;">Time:	{{start_time}}</li>
+<!--<li style="list-style-type: none; font-size: 14px;margin-left: 1%; font-weight: bold;">End:	{{finish_time}}</li>-->
+
+
+{% for devices in form %}
+{% for key,value in devices.items %}
+<button type="button" class="collapsible"><font size="5" style="font-family: monospace;"><u>{{key}}</u></font></button>
+<div class="content">
+	{% for k,v in value.items %}
+	<button type="button" class="collapsible2"><font size="4" color="silver" style="font-family: monospace;"><u>{{k}}</u></font></button>
+	<div class="content2">
+{% for item in v %}
+{% if 'Ping to External BGP Neighbors' in k or 'Today Logs(exclude HSRP and TRACKING)' in k %}
+<li style="list-style-type: none; font-size: 13px;margin-left: 3%">{{item}}</li>
+{% else %}
+<pre style="color:silver"><li style="font-family: monospace; color: silver;  list-style-type: none; font-size: 13px;margin-left: 3%">{{item}}</li></pre>
+{% endif %}
+{% endfor %}
+</div>
+{% endfor %}
+
+{% endfor %}
+</div>
+<!---b style="margin-left: 2%">==================================================================</b-->
+{% endfor %}
+{% endif %}
+
+
+
+<!--{% for item in form %}
+{% for line in item %}
+<li style="list-style-type: none; font-size: 10px">{{line}}</li>
+{% endfor %}
+<br>
+{% endfor %}
+--->
+
+<script>
+var coll1 = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll1.length; i++) {
+  coll1[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
+var coll2 = document.getElementsByClassName("collapsible2");
+var j;
+
+for (j = 0; j < coll2.length; j++) {
+  coll2[j].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content2 = this.nextElementSibling;
+    if (content2.style.display === "block") {
+      content2.style.display = "none";
+    } else {
+      content2.style.display = "block";
+    }
+  });
+}
+
+</script>
+
+</div>
+{% endblock %}

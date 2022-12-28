@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if projectname %}
+<h1 style="margin-left: 3%"> [{{projectname}} : {{sitename}}]</h1>
+{% else %}
+<h1 style="margin-left: 3%"> {{header}}</h1>
+{% endif %}
+<div style="margin-left: 5%">Total Circuits: <b>{{total}}</b>
+
+{% if user.is_authenticated %}
+<a href="{% url 'circuitupload' %}" style="margin-left: 5%; margin-right: 1%">[Upload]</a>
+<a href="{% url 'add_circuit' %}" style="margin-left: 5%; margin-right: 1%">[Add Circuit]</a>{% endif %}
+{% if export %}
+<a href="{% url 'circuitdownload' %}" style="margin-left: 5%; margin-right: 1%">[Download]</a>
+{% endif %}
+</div>
+ <table class=a id='myTable'>
+		<tr>
+			<th>Circit ID</th>
+			<th>Bandwidth</th>
+			<th>WAN IP</th>
+                  <th>Circuit Type</th>
+			<th>Project</th>
+			<th>Site</th>
+			<th>Action</th>
+		</tr>
+		{% for field in form %}
+		<tr>
+			<td>{{field.CircuitID}}</td>
+			<td>{{field.Bandwidth}}</td>
+      		<td>{{field.WANIP}}</td>
+                  <td>{{field.CircuitType}}</td>
+      		<td><a href="{% url 'circuits' field.pk 0 field.Project %}">{{field.Project}}</td></a>
+      		<td><a href="{% url 'circuits' field.pk field.Site 0 %}">{{field.Site}}</td></a>
+      		<td>
+      			<li style="list-style-type: none;">
+                        <a href="{% url 'edit_circuit' 'circuit' field.pk %}">[Edit]</a>
+                  </li>
+      		</td>
+		</tr>
+		{% endfor %}
+	</table>
+<div style="margin-left: 5%">Total Circuits: <b>{{total}}</b>
+
+{% if user.is_authenticated %}
+<a href="{% url 'circuitupload' %}" style="margin-left: 5%; margin-right: 1%">[Upload]</a>
+<a href="{% url 'add_circuit' %}" style="margin-left: 5%; margin-right: 1%">[Add Circuit]</a>{% endif %}
+{% if export %}
+<a href="{% url 'circuitdownload' %}" style="margin-left: 5%; margin-right: 1%">[Download]</a>
+{% endif %}
+</div>
+<br></br>
+
+
+
+{% endblock %}
