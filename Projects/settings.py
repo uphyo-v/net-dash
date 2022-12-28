@@ -129,7 +129,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'CMS\\CMS_resources')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'CMS/CMS_resources')
 MEDIA_URL = '/resources/'
 # FILE_ROOT = os.path.join(BASE_DIR, 'backup')
 # print(FILE_ROOT)
